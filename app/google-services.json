@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "693108464709",
+    "project_id": "weightcontrolfit-85d34",
+    "storage_bucket": "weightcontrolfit-85d34.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693108464709:android:888097ea3daebc6530972c",
+        "android_client_info": {
+          "package_name": "com.alberto.jsonprueba"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPsE_BUjwAaqzDe9bPDp_bdROLlSqws9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693108464709:android:7a85d70c8b0222fd30972c",
+        "android_client_info": {
+          "package_name": "com.alberto.wcfproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPsE_BUjwAaqzDe9bPDp_bdROLlSqws9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

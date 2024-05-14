@@ -1,0 +1,23 @@
+<resources>
+    <!--  Common Screen  -->
+    <string name="app_name">WCFProject</string>
+    <string name="common_email">Email</string>
+    <string name="common_password">Contraseña</string>
+    <string name="common_register">Registrar</string>
+    <string name="common_error_fields">Rellena los campos correctamente</string>
+
+
+    <!--  Login Screen  -->
+    <string name="login_screen_login">Iniciar sesión</string>
+    <string name="login_screen_error">Error al inicio de sesión</string>
+
+
+    <!--  Register Screen  -->
+    <string name="register_screen_title">Registro</string>
+    <string name="register_screen_height">Altura</string>
+    <string name="register_screen_weight">Peso</string>
+    <string name="register_screen_repeat_password">Repetir contraseña</string>
+    <string name="register_screen_error_firebase"> Registro fallido</string>
+
+
+</resources>
