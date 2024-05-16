@@ -1,13 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
     tools:context=".ui.home.exercise.ExercisesFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="24dp"
+        android:autofillHints="emailAddress"
+        android:enabled="false"
+        android:hint="@string/common_email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/et_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        android:enabled="false"
+        android:hint="@string/register_screen_weight"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/et_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="emailAddress"
+        android:enabled="false"
+        android:hint="@string/register_screen_height"
+        android:importantForAutofill="no"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/et_imc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        android:autofillHints="emailAddress"
+        android:enabled="false"
+        android:hint="IMC"
+        android:importantForAutofill="no"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/bt_edit_save"
+        android:layout_width="156dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Profile" />
-</FrameLayout>
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:tag="viewMode"
+        android:text="Editar datos" />
+
+</LinearLayout>

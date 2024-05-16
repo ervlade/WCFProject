@@ -6,8 +6,8 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
-import com.alberto.wcfproject.WCFApplication
 import com.alberto.wcfproject.data.User
+import com.alberto.wcfproject.data.WCFDatabase
 import com.alberto.wcfproject.databinding.ActivityLoginBinding
 import com.alberto.wcfproject.ui.home.HomeActivity
 import com.alberto.wcfproject.ui.register.RegisterActivity
@@ -56,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
         return valid
     }
+
     //Iniciar sesión en Firebase Authentication
     private fun loginUser(email: String, password: String) {
 
@@ -65,8 +66,8 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
 
-                    (application as WCFApplication).database.userDao()
-                        .insertAll(User(auth.currentUser?.uid ?: "", email, 0f, 0))
+                    WCFDatabase.instance?.userDao()
+                        ?.insertActiveUser(User(auth.currentUser?.uid ?: "", email, 0f, 0))
 
                     val intent = Intent(this, HomeActivity::class.java)
 
@@ -76,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, getString(R.string.login_screen_error), Toast.LENGTH_SHORT)
                         .show()
                 }
-
             }
     }
 }

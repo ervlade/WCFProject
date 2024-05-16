@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
-import com.alberto.wcfproject.WCFApplication
+import com.alberto.wcfproject.data.WCFDatabase
 import com.alberto.wcfproject.ui.home.HomeActivity
 import com.alberto.wcfproject.ui.login.LoginActivity
 
@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun validateUser() {
         Handler(Looper.getMainLooper()).postDelayed({
-            val user = (application as WCFApplication).database.userDao().getAll().firstOrNull()
+            val user = WCFDatabase.instance?.userDao()?.activeUser()
 
             if(user != null) {
                 startActivity(Intent(this, HomeActivity::class.java))
