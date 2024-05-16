@@ -35,7 +35,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-
+    //Crea un nuevo usuario en Firebase Authentication
     private fun registerUser(email: String, password: String) {
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
@@ -52,7 +52,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
     }
-
+    //Valida los campos de registro del usuario
     private fun validateFields(): Boolean {
         var valid = true
 

@@ -19,5 +19,13 @@
     <string name="register_screen_repeat_password">Repetir contraseña</string>
     <string name="register_screen_error_firebase"> Registro fallido</string>
 
+    <!--  Exercises Screen  -->
+    <string name="exercises_screen_title">Ejercicios</string>
+
+    <!--  Profile Screen  -->
+    <string name="profile_screen_title">Perfil</string>
+
+    <!--  Routines Screen  -->
+    <string name="routines_screen_title">Rutinas</string>
 
 </resources>
