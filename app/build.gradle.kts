@@ -52,6 +52,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // Firebase
+    implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
 
     // Database
