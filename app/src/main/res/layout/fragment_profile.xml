@@ -61,6 +61,16 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="16dp"
         android:tag="viewMode"
-        android:text="Editar datos" />
+        android:text="@string/profile_screen_edit_save" />
+
+    <Button
+        android:id="@+id/bt_sign_off"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="16dp"
+        android:tag="viewMode"
+        android:text="@string/profile_screen_sign_off" />
 
 </LinearLayout>

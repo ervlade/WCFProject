@@ -9,7 +9,7 @@ import androidx.room.Update
 @Dao
 interface UserDao {
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM user ")
     fun activeUser(): User?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
