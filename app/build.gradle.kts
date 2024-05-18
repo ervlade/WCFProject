@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    //Fragment
+    implementation("androidx.fragment:fragment-ktx:1.7.1")
 
     // Core
     implementation("androidx.core:core-ktx:1.13.1")

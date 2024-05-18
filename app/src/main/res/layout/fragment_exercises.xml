@@ -22,7 +22,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Abdomen"
+                android:text="@string/exercises_screen_abdomen"
                 app:checkedIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -30,7 +30,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pecho"
+                android:text="@string/exercises_screen_chest"
                 app:checkedIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -38,7 +38,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Espalda"
+                android:text="@string/exercises_screen_back"
                 app:checkedIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -46,7 +46,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hombros"
+                android:text="@string/exercises_screen_shoulders"
                 app:checkedIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -54,7 +54,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Biceps"
+                android:text="@string/exercises_screen_biceps"
                 app:checkedIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -62,7 +62,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Triceps"
+                android:text="@string/exercises_screen_triceps"
                 app:checkedIconEnabled="true" />
 
             <com.google.android.material.chip.Chip
@@ -70,7 +70,7 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Piernas"
+                android:text="@string/exercises_screen_legs"
                 app:checkedIconEnabled="true" />
         </com.google.android.material.chip.ChipGroup>
     </HorizontalScrollView>

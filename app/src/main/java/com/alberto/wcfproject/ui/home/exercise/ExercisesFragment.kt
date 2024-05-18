@@ -24,7 +24,6 @@ class ExercisesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentExercisesBinding.inflate(layoutInflater)
 
         return binding.root
@@ -58,6 +57,7 @@ class ExercisesFragment : Fragment() {
         }
     }
 
+    // Recolecta los ejercicios de la base de datos Firestore
     private fun collectExercises() {
         db = FirebaseFirestore.getInstance()
         val collectionReference = db.collection("exercises")
@@ -81,6 +81,7 @@ class ExercisesFragment : Fragment() {
         }
     }
 
+    // Filtra los ejercicios según los CheckBox seleccionados
     private fun filterExercises(): List<Exercise> {
         val filteredData = mutableListOf<Exercise>()
 
@@ -127,6 +128,7 @@ class ExercisesFragment : Fragment() {
         return filteredData
     }
 
+    // Actualiza la vista del RecyclerView con los ejercicios dados
     private fun updateExercisesView(data: List<Exercise>) {
         if(binding.rvExercices.adapter != null) {
             (binding.rvExercices.adapter as ExerciseAdapter).data = filterExercises()

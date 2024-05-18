@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
 
         validateUser()
     }
-
+    // Valida al usuario y dirige a la actividad correspondiente después de un retraso de 2 segundos
     private fun validateUser() {
         Handler(Looper.getMainLooper()).postDelayed({
             val user = WCFDatabase.instance?.userDao()?.activeUser()

@@ -23,7 +23,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpViews()
     }
-
+    // Configura las vistas y el comportamiento del menú
     private fun setUpViews() {
         navigateFragment(getString(R.string.exercises_screen_title), ExercisesFragment())
 
@@ -50,13 +50,13 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
-
+    // Controla el comportamiento del botón de retroceso para cerrar la aplicación
     override fun onBackPressed() {
         finishAffinity()
 
         super.onBackPressed()
     }
-
+    // Navega a un fragmento específico y actualiza el título en la barra de herramientas
     private fun navigateFragment(title: String, fragment: Fragment) {
         binding.inToolbar.tvTitle.text = title
         supportFragmentManager.beginTransaction().replace(R.id.fc_home, fragment).commit()

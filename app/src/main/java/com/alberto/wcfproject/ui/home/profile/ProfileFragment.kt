@@ -34,6 +34,7 @@ class ProfileFragment : Fragment() {
         setUpViews()
     }
 
+    // Configura las vistas y los listeners de botones
     private fun setUpViews() {
         binding.btEditSave.setOnClickListener {
             if (it.tag == "viewMode") {
@@ -67,17 +68,12 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btSignOff.setOnClickListener {
-            logout()
+            val dialog = DialogFragment()
+            dialog.show(parentFragmentManager, "DialogFragment")
 
         }
     }
-    private  fun logout(){
-        FirebaseAuth.getInstance().signOut()
-        val intent = Intent(activity,LoginActivity::class.java)
-        Toast.makeText(activity,"Sesión cerrada", Toast.LENGTH_SHORT).show()
-        startActivity(intent)
-    }
-
+    // Recolecta los datos del usuario y los muestra en las vistas
     private fun collectUserData() {
         if (user != null) {
             binding.etEmail.setText(user.email)
@@ -95,7 +91,7 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
+    // Guarda los datos del usuario en la base de datos
     private fun saveUserData(weight: Float, height: Int) {
         val userCopy = user?.copy(weight = weight, height = height)
 
@@ -104,6 +100,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    // Calcula el Índice de Masa Corporal (IMC) del usuario
     private fun calculateIMC(weight: Float, height: Int): Float {
         return weight / (height * 0.02f)
     }

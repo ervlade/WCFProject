@@ -26,7 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
         setUpViews()
     }
-
+    // Configura las vistas y los listeners de botones
     private fun setUpViews() {
         binding.btLogin.setOnClickListener {
 

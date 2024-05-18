@@ -20,6 +20,7 @@ class RegisterActivity : AppCompatActivity() {
         setUpViews()
     }
 
+    // Configura las vistas y los listeners de botones
     private fun setUpViews() {
         binding.inToolbar.tvTitle.text = getString(R.string.register_screen_title)
         binding.inToolbar.ivBack.setOnClickListener {

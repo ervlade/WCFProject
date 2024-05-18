@@ -21,12 +21,28 @@
 
     <!--  Exercises Screen  -->
     <string name="exercises_screen_title">Ejercicios</string>
+    <string name="exercises_screen_chest">Pecho</string>
+    <string name="exercises_screen_back">Espalda</string>
+    <string name="exercises_screen_triceps">Tríceps</string>
+    <string name="exercises_screen_biceps">Bíceps</string>
+    <string name="exercises_screen_abdomen">Abdomen</string>
+    <string name="exercises_screen_legs">Piernas</string>
+    <string name="exercises_screen_shoulders">Hombros</string>
+
 
     <!--  Profile Screen  -->
     <string name="profile_screen_title">Perfil</string>
     <string name="profile_screen_edit_save">Editar datos</string>
     <string name="profile_screen_save_data">Guardar datos</string>
     <string name="profile_screen_sign_off">Cerrar sesión</string>
+    <string name="profile_screen_imc">IMC</string>
+
+    <!--  Dialog Screen  -->
+    <string name="dialog_screen_question">¿Seguro que quieres cerrar sesión?</string>
+    <string name="dialog_screen_cancel">Cancelar</string>
+    <string name="dialog_screen_accept">Aceptar</string>
+
+
 
 
 
