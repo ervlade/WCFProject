@@ -67,7 +67,8 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btSignOff.setOnClickListener {
-            logout()
+            val dialog = DialogFragment()
+            dialog.show(parentFragmentManager, "DialogFragment")
 
         }
     }
