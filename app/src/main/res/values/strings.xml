@@ -24,6 +24,11 @@
 
     <!--  Profile Screen  -->
     <string name="profile_screen_title">Perfil</string>
+    <string name="profile_screen_edit_save">Editar datos</string>
+    <string name="profile_screen_save_data">Guardar datos</string>
+    <string name="profile_screen_sign_off">Cerrar sesión</string>
+
+
 
     <!--  Routines Screen  -->
     <string name="routines_screen_title">Rutinas</string>
