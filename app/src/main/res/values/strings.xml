@@ -42,6 +42,9 @@
     <string name="dialog_screen_cancel">Cancelar</string>
     <string name="dialog_screen_accept">Aceptar</string>
 
+    <!--  Dialog Screen  -->
+    <string name="exercise_detail_screen_edit_save">Editar datos</string>
+    <string name="exercise_detail_screen_save_data">Guardar datos</string>
 
 
 

@@ -31,11 +31,7 @@ class DialogFragment : DialogFragment() {
                 }
             }
     }
-
-<<<<<<< HEAD
     //Cierra sesión y vuelve al login
-=======
->>>>>>> origin/master
     private fun logout() {
         FirebaseAuth.getInstance().signOut()
         val intent = Intent(activity, LoginActivity::class.java)

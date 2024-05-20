@@ -17,4 +17,19 @@ interface UserDao {
 
     @Update
     fun updateActiveUser(user: User)
+
+
+}
+
+
+@Dao
+interface ExerciseUserDao {
+    @Query("SELECT * FROM ExerciseUser WHERE uid = :uid")
+    fun getExerciseUserByUid(uid: String): ExerciseUser?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertExerciseUser(exerciseUser: ExerciseUser)
+
+    @Update
+    fun updateExerciseUser(exerciseUser: ExerciseUser)
 }

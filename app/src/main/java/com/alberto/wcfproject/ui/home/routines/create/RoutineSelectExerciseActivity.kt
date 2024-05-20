@@ -1,57 +1,57 @@
-package com.alberto.wcfproject.ui.home.exercise
+package com.alberto.wcfproject.ui.home.routines.create
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.alberto.wcfproject.data.Exercise
-import com.alberto.wcfproject.databinding.FragmentExercisesBinding
+import androidx.appcompat.app.AppCompatActivity
+import com.alberto.wcfproject.data.SelectExercise
+import com.alberto.wcfproject.databinding.ActivitySelectExerciseBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
-class ExercisesFragment : Fragment() {
+class RoutineSelectExerciseActivity : AppCompatActivity() {
 
-    private lateinit var binding: FragmentExercisesBinding
+    private lateinit var binding: ActivitySelectExerciseBinding
     private lateinit var db: FirebaseFirestore
-    private lateinit var data: MutableList<Exercise>
+    private lateinit var data: MutableList<SelectExercise>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
+        binding = ActivitySelectExerciseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ): View {
-        binding = FragmentExercisesBinding.inflate(layoutInflater)
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+        setUpViews()
         collectExercises()
-
         setupCheckBoxListeners()
-
-
     }
 
-    // Recolecta los ejercicios de la base de datos Firestore
+    private fun setUpViews() {
+        binding.inToolbar.tvTitle.text = "Elegir ejercicios"
+        binding.inToolbar.ivBack.setOnClickListener {
+            onBackPressed()
+        }
+        binding.fbSelect.setOnClickListener {
+             val bundle = Intent().apply {
+                 putExtra("selected_exercises", (binding.rvExercices.adapter as SelectExerciseAdapter).dataSelected.toTypedArray())
+            }
+            
+            setResult(Activity.RESULT_OK, bundle)
+            finish()
+        }
+    }
     private fun collectExercises() {
         db = FirebaseFirestore.getInstance()
         val collectionReference = db.collection("exercises")
 
         collectionReference.get().addOnSuccessListener { querySnapshot ->
-            data = mutableListOf<Exercise>()
+            data = mutableListOf()
 
             for (document in querySnapshot.documents) {
-                val exercise = Exercise(
+                val exercise = SelectExercise(
                     document.id,
                     document.getString("name") ?: "",
                     document.getString("imageUrl") ?: "",
-                    document.getString("muscleGroup") ?: ""
+                    document.getString("muscleGroup") ?: "",
+                    false
                 )
 
                 data.add(exercise)
@@ -63,8 +63,8 @@ class ExercisesFragment : Fragment() {
     }
 
     // Filtra los ejercicios según los CheckBox seleccionados
-    private fun filterExercises(): List<Exercise> {
-        val filteredData = mutableListOf<Exercise>()
+    private fun filterExercises(): List<SelectExercise> {
+        val filteredData = mutableListOf<SelectExercise>()
 
         if(
             !binding.chAbdomen.isChecked &&
@@ -110,12 +110,12 @@ class ExercisesFragment : Fragment() {
     }
 
     // Actualiza la vista del RecyclerView con los ejercicios dados
-    private fun updateExercisesView(data: List<Exercise>) {
+    private fun updateExercisesView(data: List<SelectExercise>) {
         if(binding.rvExercices.adapter != null) {
-            (binding.rvExercices.adapter as ExerciseAdapter).data = filterExercises()
-            (binding.rvExercices.adapter as ExerciseAdapter).notifyDataSetChanged()
+            (binding.rvExercices.adapter as SelectExerciseAdapter).data = filterExercises()
+            (binding.rvExercices.adapter as SelectExerciseAdapter).notifyDataSetChanged()
         } else {
-            binding.rvExercices.adapter = ExerciseAdapter(data)
+            binding.rvExercices.adapter = SelectExerciseAdapter(data)
         }
     }
     private fun setupCheckBoxListeners() {
