@@ -115,7 +115,10 @@ class RoutineSelectExerciseActivity : AppCompatActivity() {
             (binding.rvExercices.adapter as SelectExerciseAdapter).data = filterExercises()
             (binding.rvExercices.adapter as SelectExerciseAdapter).notifyDataSetChanged()
         } else {
-            binding.rvExercices.adapter = SelectExerciseAdapter(data)
+            val adapter = SelectExerciseAdapter(data)
+
+            adapter.dataSelected.addAll(intent.getParcelableArrayExtra("selected_exercises", SelectExercise::class.java)?.toList() ?: listOf())
+            binding.rvExercices.adapter = adapter
         }
     }
     private fun setupCheckBoxListeners() {

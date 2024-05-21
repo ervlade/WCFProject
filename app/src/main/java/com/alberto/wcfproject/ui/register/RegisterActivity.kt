@@ -75,4 +75,6 @@ class RegisterActivity : AppCompatActivity() {
 
         return valid
     }
+
+
 }

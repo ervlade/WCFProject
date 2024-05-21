@@ -64,13 +64,13 @@
 
             <Button
                 android:id="@+id/bt_update"
-                tag="viewMode"
+                android:tag="viewMode"
                 android:layout_width="156dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="16dp"
-                android:text="Actualizar" />
+                android:text="Editar datos" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

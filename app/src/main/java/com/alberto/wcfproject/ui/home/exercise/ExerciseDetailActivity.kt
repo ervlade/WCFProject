@@ -56,6 +56,9 @@ class ExerciseDetailActivity : AppCompatActivity() {
                 binding.etExerciseRepetitions.isEnabled = false
                 binding.etNotes.isEnabled = false
 
+                binding.btUpdate.text = getString(R.string.exercise_detail_screen_edit_save)
+
+
                 saveExerciseUserData(
                     exerciseUser.uid,
                     binding.etExerciseWeight.text.toString().toFloatOrNull(),
@@ -63,7 +66,6 @@ class ExerciseDetailActivity : AppCompatActivity() {
                     binding.etNotes.text?.toString()
                 )
 
-                binding.btUpdate.text = getString(R.string.exercise_detail_screen_edit_save)
                 it.tag = "viewMode"
             }
         }
