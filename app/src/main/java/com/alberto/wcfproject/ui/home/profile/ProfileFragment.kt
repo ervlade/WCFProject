@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.WCFDatabase
 import com.alberto.wcfproject.databinding.FragmentProfileBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfileFragment : Fragment() {
 
@@ -69,6 +71,7 @@ class ProfileFragment : Fragment() {
 
         }
     }
+
     // Recolecta los datos del usuario y los muestra en las vistas
     private fun collectUserData() {
         if (user != null) {
@@ -87,12 +90,25 @@ class ProfileFragment : Fragment() {
             }
         }
     }
+
     // Guarda los datos del usuario en la base de datos
     private fun saveUserData(weight: Float, height: Int) {
-        val userCopy = user?.copy(weight = weight, height = height)
+        if(user != null) {
+            val userCopy = user.copy(weight = weight, height = height)
 
-        if (userCopy != null) {
             WCFDatabase.instance?.userDao()?.updateActiveUser(userCopy)
+            FirebaseFirestore.getInstance().collection("users").document(user.uid).update(user.toMap())
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(activity, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            activity,
+                            "Error al registrar el usuario en la base de datos",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
         }
     }
 

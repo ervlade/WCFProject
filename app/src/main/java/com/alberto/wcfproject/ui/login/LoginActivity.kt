@@ -12,10 +12,13 @@ import com.alberto.wcfproject.databinding.ActivityLoginBinding
 import com.alberto.wcfproject.ui.home.HomeActivity
 import com.alberto.wcfproject.ui.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var db: FirebaseFirestore
+    private lateinit var userData: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,24 +62,45 @@ class LoginActivity : AppCompatActivity() {
 
     //Iniciar sesión en Firebase Authentication
     private fun loginUser(email: String, password: String) {
-
         val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-
-                    WCFDatabase.instance?.userDao()
-                        ?.insertActiveUser(User(auth.currentUser?.uid ?: "", email, 0f, 0))
-
-                    val intent = Intent(this, HomeActivity::class.java)
-
-                    startActivity(intent)
+                    collectUserData(task.result.user?.uid ?: "")
                 } else {
 
                     Toast.makeText(this, getString(R.string.login_screen_error), Toast.LENGTH_SHORT)
                         .show()
                 }
             }
+    }
+
+    // Recolecta los datos de usuario de la base de datos Firestore
+    private fun collectUserData(userId: String) {
+        db = FirebaseFirestore.getInstance()
+        val collectionReference = db.collection("users").document(userId)
+
+        collectionReference.get().addOnCompleteListener { querySnapshot ->
+            if (querySnapshot.isSuccessful) {
+                userData = User(
+                    userId,
+                    querySnapshot.result?.getString("email") ?: "",
+                    querySnapshot.result?.getDouble("weight")?.toFloat() ?: 0f,
+                    querySnapshot.result?.getLong("height")?.toInt() ?: 0
+                )
+
+                WCFDatabase.instance?.userDao()
+                    ?.insertActiveUser(userData)
+
+                val intent = Intent(this, HomeActivity::class.java)
+
+                startActivity(intent)
+            } else {
+
+                Toast.makeText(this, getString(R.string.login_screen_error), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
     }
 }

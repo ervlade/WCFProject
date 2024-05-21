@@ -41,6 +41,9 @@
         <activity
             android:name=".ui.home.routines.create.RoutineSelectExerciseActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.home.routines.detail.RoutineDetailActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

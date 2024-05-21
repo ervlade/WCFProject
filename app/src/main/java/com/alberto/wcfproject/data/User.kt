@@ -10,4 +10,13 @@ data class User(
     @ColumnInfo val email: String,
     @ColumnInfo val weight: Float,
     @ColumnInfo val height: Int
-)
+){
+    fun toMap(): Map<String, Any> {
+        return mapOf(
+            "email" to email,
+            "weight" to weight,
+            "height" to height
+        )
+    }
+}
+

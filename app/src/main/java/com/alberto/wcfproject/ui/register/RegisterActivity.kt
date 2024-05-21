@@ -5,18 +5,26 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
+import com.alberto.wcfproject.data.User
 import com.alberto.wcfproject.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    private lateinit var firestore: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
+
+        // Inicializa Firebase Firestore y Auth
+        firestore = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
+
         setUpViews()
     }
 
@@ -36,15 +44,26 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
-    //Crea un nuevo usuario en Firebase Authentication
-    private fun registerUser(email: String, password: String) {
-        val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
+    // Crea un nuevo usuario en Firebase Authentication
+    private fun registerUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    finish()
+                    // El usuario se registró exitosamente
+                    val firebaseUser = auth.currentUser
+                    if (firebaseUser != null) {
+                        // Crear el objeto UserData con los datos ingresados por el usuario
+                        val user = User(
+                            firebaseUser.uid,
+                            email,
+                            binding.etWeight.text.toString().toFloat(),
+                            binding.etHeight.text.toString().toInt()
+                        )
+                        createUserInFirestore(user)
+                    }
                 } else {
+                    // Error al registrar el usuario
                     Toast.makeText(
                         this,
                         getString(R.string.register_screen_error_firebase),
@@ -53,7 +72,25 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
     }
-    //Valida los campos de registro del usuario
+
+    // Crea el usuario en Firestore
+    private fun createUserInFirestore(user: User) {
+        firestore.collection("users").document(user.uid).set(user.toMap())
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Error al registrar el usuario en la base de datos",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+    // Valida los campos de registro del usuario
     private fun validateFields(): Boolean {
         var valid = true
 
@@ -75,6 +112,4 @@ class RegisterActivity : AppCompatActivity() {
 
         return valid
     }
-
-
 }

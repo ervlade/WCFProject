@@ -6,8 +6,9 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import com.alberto.wcfproject.data.WCFDatabase
 import com.alberto.wcfproject.databinding.FragmentDialogBinding
 import com.alberto.wcfproject.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +35,8 @@ class DialogFragment : DialogFragment() {
     //Cierra sesión y vuelve al login
     private fun logout() {
         FirebaseAuth.getInstance().signOut()
+        WCFDatabase.instance?.clearAllTables()
+
         val intent = Intent(activity, LoginActivity::class.java)
         Toast.makeText(activity, "Sesión cerrada", Toast.LENGTH_SHORT).show()
         startActivity(intent)
