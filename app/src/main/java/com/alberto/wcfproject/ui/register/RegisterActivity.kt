@@ -1,6 +1,7 @@
 package com.alberto.wcfproject.ui.register
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.model.User
 import com.alberto.wcfproject.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RegisterActivity : AppCompatActivity() {
@@ -53,6 +55,8 @@ class RegisterActivity : AppCompatActivity() {
                     // El usuario se registró exitosamente
                     val firebaseUser = auth.currentUser
                     if (firebaseUser != null) {
+                        // Enviar correo de verificación
+                        sendVerificationEmail(firebaseUser)
                         // Crear el objeto UserData con los datos ingresados por el usuario
                         val user = User(
                             firebaseUser.uid,
@@ -115,5 +119,25 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         return valid
+    }
+    // Envía un correo de verificación al usuario
+    private fun sendVerificationEmail(user: FirebaseUser) {
+        user.sendEmailVerification()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        this,
+                        getString(R.string.register_screen_verification_email_sent),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Log.e("RegisterActivity", "Error al enviar el correo de verificación: ${task.exception}")
+                    Toast.makeText(
+                        this,
+                        getString(R.string.register_screen_verification_email_failed),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 }

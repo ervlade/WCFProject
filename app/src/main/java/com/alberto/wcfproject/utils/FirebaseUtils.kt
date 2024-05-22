@@ -234,7 +234,7 @@ fun deleteSelectedRoutine(context: Activity, selectedRoutines: List<Routine>) {
             .document(Firebase.auth.uid.toString()).collection("routines")
         
         selectedRoutines.forEach { routine ->
-            println(routine.id)
+            //println(routine.id)
             collectionReference.document(routine.id).delete().await()
         }
         
