@@ -2,7 +2,7 @@ package com.alberto.wcfproject.ui.home.routines.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.alberto.wcfproject.data.Exercise
+import com.alberto.wcfproject.data.model.Exercise
 import com.alberto.wcfproject.databinding.ActivityDetailRoutineBinding
 import com.alberto.wcfproject.ui.home.exercise.ExerciseAdapter
 
@@ -27,9 +27,6 @@ class RoutineDetailActivity : AppCompatActivity() {
 
         val exercises = intent.getParcelableArrayListExtra("routine_exercises",  Exercise::class.java)?.toList() ?: listOf()
 
-        exercises.forEach {
-            println(it.name)
-        }
         binding.rvExercices.adapter = ExerciseAdapter(exercises)
     }
 }

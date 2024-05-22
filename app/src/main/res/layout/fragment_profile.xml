@@ -16,7 +16,8 @@
         android:autofillHints="emailAddress"
         android:enabled="false"
         android:hint="@string/common_email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:textColor="@color/edit_text_color" />
 
     <EditText
         android:id="@+id/et_weight"
@@ -25,9 +26,10 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="8dp"
         android:enabled="false"
-        android:hint="@string/register_screen_weight"
+        android:hint="@string/common_weight"
         android:importantForAutofill="no"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:textColor="@color/edit_text_color" />
 
     <EditText
         android:id="@+id/et_height"
@@ -39,7 +41,8 @@
         android:enabled="false"
         android:hint="@string/register_screen_height"
         android:importantForAutofill="no"
-        android:inputType="number" />
+        android:inputType="number"
+        android:textColor="@color/edit_text_color" />
 
     <EditText
         android:id="@+id/et_imc"
@@ -51,7 +54,8 @@
         android:enabled="false"
         android:hint="@string/profile_screen_imc"
         android:importantForAutofill="no"
-        android:inputType="number" />
+        android:inputType="number"
+        android:textColor="@color/edit_text_color" />
 
     <Button
         android:id="@+id/bt_edit_save"
@@ -61,7 +65,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="16dp"
         android:tag="viewMode"
-        android:text="@string/profile_screen_edit_save" />
+        android:text="@string/common_edit_save" />
 
     <Button
         android:id="@+id/bt_sign_off"

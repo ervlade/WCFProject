@@ -5,20 +5,19 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alberto.wcfproject.data.Exercise
-import com.alberto.wcfproject.data.Routine
-import com.alberto.wcfproject.databinding.ItemExerciseRoutineBinding
+import com.alberto.wcfproject.data.model.Routine
+import com.alberto.wcfproject.databinding.ItemRoutineBinding
 import com.alberto.wcfproject.ui.home.routines.detail.RoutineDetailActivity
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.tasks.await
+import com.alberto.wcfproject.utils.collectExercises
 
-class RoutineAdapter(val context: Context, private val data: List<Routine>) :
+class RoutineAdapter(val context: Context, private var data: List<Routine>) :
     RecyclerView.Adapter<RoutineAdapter.RoutineHolder>() {
+
+    private val selectedRoutines = mutableSetOf<Routine>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoutineHolder {
         return RoutineHolder(
-            ItemExerciseRoutineBinding.inflate(
+            ItemRoutineBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -35,43 +34,40 @@ class RoutineAdapter(val context: Context, private val data: List<Routine>) :
         return data.size
     }
 
-    inner class RoutineHolder(private val binding: ItemExerciseRoutineBinding) :
+    inner class RoutineHolder(private val binding: ItemRoutineBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(itemData: Routine) {
             binding.tvName.text = itemData.name
             binding.root.setOnClickListener {
-                val exercises = collectExercisesFirebase(itemData.exercises)
+                val exercises = collectExercises(itemData.exercises)
                 val intent = Intent(context, RoutineDetailActivity::class.java).apply {
                     putExtra("routine_name", itemData.name)
                     putParcelableArrayListExtra("routine_exercises", ArrayList(exercises))
                 }
 
                 context.startActivity(intent)
+
             }
-        }
-
-        private fun collectExercisesFirebase(exercisesIds: List<String>): List<Exercise> {
-            val db = FirebaseFirestore.getInstance()
-            val data = mutableListOf<Exercise>()
-
-            return runBlocking {
-                exercisesIds.forEach {
-                    val result = db.collection("exercises").document(it).get().await()
-
-                    val exercise = Exercise(
-                        result.id,
-                        result.getString("name") ?: "",
-                        result.getString("imageUrl") ?: "",
-                        result.getString("muscleGroup") ?: ""
-                    )
-
-                    data.add(exercise)
+            binding.cbSelectRoutine.setOnCheckedChangeListener(null) // Clear previous listeners
+            binding.cbSelectRoutine.isChecked = selectedRoutines.contains(itemData)
+            binding.cbSelectRoutine.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    selectedRoutines.add(itemData)
+                } else {
+                    selectedRoutines.remove(itemData)
                 }
-
-                data
             }
         }
+    }
+
+    fun getSelectedRoutines(): List<Routine> {
+        return selectedRoutines.toList()
+    }
+
+    fun updateData(newData: List<Routine>) {
+        data = newData
+        notifyDataSetChanged()
     }
 }

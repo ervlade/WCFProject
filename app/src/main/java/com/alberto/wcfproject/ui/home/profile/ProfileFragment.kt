@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.alberto.wcfproject.R
-import com.alberto.wcfproject.data.WCFDatabase
+import com.alberto.wcfproject.data.database.WCFDatabase
 import com.alberto.wcfproject.databinding.FragmentProfileBinding
-import com.google.firebase.firestore.FirebaseFirestore
+import com.alberto.wcfproject.utils.calculateIMC
+import com.alberto.wcfproject.utils.saveUserData
 
 class ProfileFragment : Fragment() {
 
@@ -28,12 +28,27 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        collectUserData()
         setUpViews()
     }
 
     // Configura las vistas y los listeners de botones
     private fun setUpViews() {
+        if (user != null) {
+            binding.etEmail.setText(user.email)
+
+            if (user.weight > 0f) {
+                binding.etWeight.setText(user.weight.toString())
+            }
+
+            if (user.height > 0f) {
+                binding.etHeight.setText(user.height.toString())
+            }
+
+            if (user.weight > 0f && user.height > 0f) {
+                binding.etImc.setText(String.format("%.2f", calculateIMC(user.weight, user.height)))
+            }
+        }
+
         binding.btEditSave.setOnClickListener {
             if (it.tag == "viewMode") {
                 binding.etWeight.isEnabled = true
@@ -54,11 +69,11 @@ class ProfileFragment : Fragment() {
                         )
                     )
                 )
-                binding.btEditSave.text = getString(R.string.profile_screen_edit_save)
+                binding.btEditSave.text = getString(R.string.common_edit_save)
 
                 saveUserData(
-                    binding.etWeight.text.toString().toFloat(),
-                    binding.etHeight.text.toString().toInt()
+                    requireActivity(),
+                    user?.copy(weight = binding.etWeight.text.toString().toFloat(), height = binding.etHeight.text.toString().toInt())
                 )
                 it.tag = "viewMode"
             }
@@ -66,54 +81,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btSignOff.setOnClickListener {
-            val dialog = DialogFragment()
-            dialog.show(parentFragmentManager, "DialogFragment")
-
+            LogoutDialog().show(parentFragmentManager, "DialogFragment")
         }
-    }
-
-    // Recolecta los datos del usuario y los muestra en las vistas
-    private fun collectUserData() {
-        if (user != null) {
-            binding.etEmail.setText(user.email)
-
-            if (user.weight > 0f) {
-                binding.etWeight.setText(user.weight.toString())
-            }
-
-            if (user.height > 0f) {
-                binding.etHeight.setText(user.height.toString())
-            }
-
-            if (user.weight > 0f && user.height > 0f) {
-                binding.etImc.setText(String.format("%.2f", calculateIMC(user.weight, user.height)))
-            }
-        }
-    }
-
-    // Guarda los datos del usuario en la base de datos
-    private fun saveUserData(weight: Float, height: Int) {
-        if(user != null) {
-            val userCopy = user.copy(weight = weight, height = height)
-
-            WCFDatabase.instance?.userDao()?.updateActiveUser(userCopy)
-            FirebaseFirestore.getInstance().collection("users").document(user.uid).update(user.toMap())
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(activity, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(
-                            activity,
-                            "Error al registrar el usuario en la base de datos",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-        }
-    }
-
-    // Calcula el Índice de Masa Corporal (IMC) del usuario
-    private fun calculateIMC(weight: Float, height: Int): Float {
-        return weight / (height * 0.02f)
     }
 }

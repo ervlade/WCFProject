@@ -6,8 +6,8 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
-import com.alberto.wcfproject.data.User
-import com.alberto.wcfproject.data.WCFDatabase
+import com.alberto.wcfproject.data.model.User
+import com.alberto.wcfproject.data.database.WCFDatabase
 import com.alberto.wcfproject.databinding.ActivityLoginBinding
 import com.alberto.wcfproject.ui.home.HomeActivity
 import com.alberto.wcfproject.ui.register.RegisterActivity
@@ -29,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
         setUpViews()
     }
+
     // Configura las vistas y los listeners de botones
     private fun setUpViews() {
         binding.btLogin.setOnClickListener {

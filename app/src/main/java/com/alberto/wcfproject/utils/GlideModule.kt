@@ -1,4 +1,4 @@
-package com.alberto.wcfproject.ui
+package com.alberto.wcfproject.utils
 
 import android.content.Context
 import com.bumptech.glide.Glide
@@ -11,6 +11,7 @@ import java.io.InputStream
 
 @GlideModule
 class MyAppGlideModule : AppGlideModule() {
+    
     // Sobrescribe el método registerComponents para registrar el componente personalizado de Glide
     @Override
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {

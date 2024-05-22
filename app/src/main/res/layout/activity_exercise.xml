@@ -34,7 +34,7 @@
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="24dp"
                 android:enabled="false"
-                android:hint="Peso"
+                android:hint="@string/exercises_detail_screen_weight"
                 android:inputType="numberDecimal"
                 android:textColor="@color/edit_text_color" />
 
@@ -45,7 +45,7 @@
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="8dp"
                 android:enabled="false"
-                android:hint="Repeticiones"
+                android:hint="@string/exercises_detail_screen_repetitions"
                 android:inputType="number"
                 android:textColor="@color/edit_text_color" />
 
@@ -57,20 +57,20 @@
                 android:layout_marginTop="8dp"
                 android:enabled="false"
                 android:gravity="start"
-                android:hint="Anotaciones"
+                android:hint="@string/exercises_detail_screen_notes"
                 android:inputType="textMultiLine"
                 android:scrollbars="vertical"
                 android:textColor="@color/edit_text_color" />
 
             <Button
                 android:id="@+id/bt_update"
-                android:tag="viewMode"
                 android:layout_width="156dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="16dp"
-                android:text="Editar datos" />
+                android:tag="viewMode"
+                android:text="@string/common_edit_save" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

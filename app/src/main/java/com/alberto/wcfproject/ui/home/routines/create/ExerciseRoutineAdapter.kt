@@ -3,7 +3,7 @@ package com.alberto.wcfproject.ui.home.routines.create
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alberto.wcfproject.data.SelectExercise
+import com.alberto.wcfproject.data.model.SelectExercise
 import com.alberto.wcfproject.databinding.ItemExerciseRoutineBinding
 
 class ExerciseRoutineAdapter(var data: List<SelectExercise>) :
@@ -34,9 +34,6 @@ class ExerciseRoutineAdapter(var data: List<SelectExercise>) :
 
         fun bind(itemData: SelectExercise) {
             binding.tvName.text = itemData.name
-
-
         }
     }
-
 }

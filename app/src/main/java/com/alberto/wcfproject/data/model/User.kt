@@ -1,4 +1,4 @@
-package com.alberto.wcfproject.data
+package com.alberto.wcfproject.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -9,8 +9,8 @@ data class User(
     @PrimaryKey val uid: String,
     @ColumnInfo val email: String,
     @ColumnInfo val weight: Float,
-    @ColumnInfo val height: Int
-){
+    @ColumnInfo val height: Int,
+) {
     fun toMap(): Map<String, Any> {
         return mapOf(
             "email" to email,

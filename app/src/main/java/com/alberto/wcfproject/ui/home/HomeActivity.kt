@@ -23,9 +23,10 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpViews()
     }
+
     // Configura las vistas y el comportamiento del menú
     private fun setUpViews() {
-        navigateFragment(getString(R.string.exercises_screen_title), ExercisesFragment())
+        navigateFragment(getString(R.string.common_exercises), ExercisesFragment())
 
         binding.inToolbar.ivBack.setImageResource(R.drawable.menu)
         binding.inToolbar.ivBack.setOnClickListener {
@@ -33,15 +34,26 @@ class HomeActivity : AppCompatActivity() {
         }
         binding.nvMenu.menu.forEach { menuItem ->
             menuItem.setOnMenuItemClickListener { menu ->
-                when(menu.itemId) {
+                when (menu.itemId) {
                     R.id.mn_exercises -> {
-                        navigateFragment(getString(R.string.exercises_screen_title), ExercisesFragment())
+                        navigateFragment(
+                            getString(R.string.common_exercises),
+                            ExercisesFragment()
+                        )
                     }
+
                     R.id.mn_routines -> {
-                        navigateFragment(getString(R.string.routines_screen_title), RoutinesFragment())
+                        navigateFragment(
+                            getString(R.string.routines_screen_title),
+                            RoutinesFragment()
+                        )
                     }
+
                     R.id.mn_profile -> {
-                        navigateFragment(getString(R.string.profile_screen_title), ProfileFragment())
+                        navigateFragment(
+                            getString(R.string.profile_screen_title),
+                            ProfileFragment()
+                        )
                     }
                 }
 
@@ -50,12 +62,14 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
+
     // Controla el comportamiento del botón de retroceso para cerrar la aplicación
     override fun onBackPressed() {
         finishAffinity()
 
         super.onBackPressed()
     }
+
     // Navega a un fragmento específico y actualiza el título en la barra de herramientas
     private fun navigateFragment(title: String, fragment: Fragment) {
         binding.inToolbar.tvTitle.text = title

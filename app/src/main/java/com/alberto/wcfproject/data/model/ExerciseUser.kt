@@ -1,4 +1,4 @@
-package com.alberto.wcfproject.data
+package com.alberto.wcfproject.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -9,7 +9,7 @@ data class ExerciseUser(
     @PrimaryKey val uid: String,
     @ColumnInfo val repetitions: Int?,
     @ColumnInfo val weight: Float?,
-    @ColumnInfo val notes: String?
+    @ColumnInfo val notes: String?,
 ) {
 
     fun toMap(): Map<String, Any?> {

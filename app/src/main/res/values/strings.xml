@@ -5,22 +5,29 @@
     <string name="common_password">Contraseña</string>
     <string name="common_register">Registrar</string>
     <string name="common_error_fields">Rellena los campos correctamente</string>
+    <string name="common_edit_save">Editar datos</string>
+    <string name="common_weight">Peso</string>
+    <string name="common_exercises">Ejercicios</string>
+    <string name="common_date_saved_successfully">Datos guardados exitosamente</string>
+    <string name="common_error_saving_to_database">Error al guardar en la base de datos</string>
+    <string name="common_register_fail">Error al registrar el ususario en la base de datos</string>
+    <string name="common_title">Titulo</string>
+
 
 
     <!--  Login Screen  -->
     <string name="login_screen_login">Iniciar sesión</string>
     <string name="login_screen_error">Error al inicio de sesión</string>
 
-
     <!--  Register Screen  -->
     <string name="register_screen_title">Registro</string>
     <string name="register_screen_height">Altura</string>
-    <string name="register_screen_weight">Peso</string>
     <string name="register_screen_repeat_password">Repetir contraseña</string>
     <string name="register_screen_error_firebase"> Registro fallido</string>
+    <string name="register_screen_successfully_register"> Usuario registrado exitosamente</string>
+
 
     <!--  Exercises Screen  -->
-    <string name="exercises_screen_title">Ejercicios</string>
     <string name="exercises_screen_chest">Pecho</string>
     <string name="exercises_screen_back">Espalda</string>
     <string name="exercises_screen_triceps">Tríceps</string>
@@ -29,25 +36,37 @@
     <string name="exercises_screen_legs">Piernas</string>
     <string name="exercises_screen_shoulders">Hombros</string>
 
+    <!--  Exercises Detail Screen  -->
+    <string name="exercises_detail_screen_weight">Peso</string>
+    <string name="exercises_detail_screen_repetitions">Repeticiones</string>
+    <string name="exercises_detail_screen_notes">Anotaciones</string>
 
     <!--  Profile Screen  -->
     <string name="profile_screen_title">Perfil</string>
-    <string name="profile_screen_edit_save">Editar datos</string>
     <string name="profile_screen_save_data">Guardar datos</string>
     <string name="profile_screen_sign_off">Cerrar sesión</string>
     <string name="profile_screen_imc">IMC</string>
+    <string name="profile_screen_registrate">Usuario registrado exitosamente</string>
+
 
     <!--  Dialog Screen  -->
     <string name="dialog_screen_question">¿Seguro que quieres cerrar sesión?</string>
     <string name="dialog_screen_cancel">Cancelar</string>
     <string name="dialog_screen_accept">Aceptar</string>
+    <string name="dialog_screen_session_close">Sesión cerrada</string>
+
 
     <!--  Dialog Screen  -->
-    <string name="exercise_detail_screen_edit_save">Editar datos</string>
     <string name="exercise_detail_screen_save_data">Guardar datos</string>
 
-
-
+    <!--  Routine Create Screen  -->
+    <string name="routine_create_screen_name">Nombre</string>
+    <string name="routine_create_screen_add">Añadir</string>
+    <string name="routine_create_screen_save">Guardar</string>
+    <string name="routine_create_screen_save_routine">Guardar rutina</string>
+    <string name="routine_create_screen_routine_add">Nueva rutina añadida</string>
+    <string name="routine_create_screen_choose_exercises">Elegir ejercicios</string>
+    <string name="routine_create_screen_deleted">Rutina eliminada</string>
 
     <!--  Routines Screen  -->
     <string name="routines_screen_title">Rutinas</string>

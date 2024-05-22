@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/mn_exercises"
-        android:title="@string/exercises_screen_title" />
+        android:title="@string/common_exercises" />
 
     <item
         android:id="@+id/mn_routines"

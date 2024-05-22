@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
-import com.alberto.wcfproject.data.WCFDatabase
+import com.alberto.wcfproject.data.database.WCFDatabase
 import com.alberto.wcfproject.ui.home.HomeActivity
 import com.alberto.wcfproject.ui.login.LoginActivity
 

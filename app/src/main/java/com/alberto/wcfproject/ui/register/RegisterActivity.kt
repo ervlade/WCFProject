@@ -5,7 +5,7 @@ import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
-import com.alberto.wcfproject.data.User
+import com.alberto.wcfproject.data.model.User
 import com.alberto.wcfproject.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -78,12 +78,16 @@ class RegisterActivity : AppCompatActivity() {
         firestore.collection("users").document(user.uid).set(user.toMap())
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this, getString(R.string.register_screen_successfully_register),
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
                     finish()
                 } else {
                     Toast.makeText(
                         this,
-                        "Error al registrar el usuario en la base de datos",
+                        getString(R.string.common_register_fail),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

@@ -1,23 +1,20 @@
 package com.alberto.wcfproject.ui.home.exercise
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.alberto.wcfproject.data.Exercise
+import androidx.fragment.app.Fragment
+import com.alberto.wcfproject.data.model.Exercise
 import com.alberto.wcfproject.databinding.FragmentExercisesBinding
-import com.google.firebase.firestore.FirebaseFirestore
+import com.alberto.wcfproject.utils.collectExercises
+import com.alberto.wcfproject.utils.filterExercises
 
 class ExercisesFragment : Fragment() {
 
     private lateinit var binding: FragmentExercisesBinding
-    private lateinit var db: FirebaseFirestore
-    private lateinit var data: MutableList<Exercise>
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var data: List<Exercise>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,93 +28,31 @@ class ExercisesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        collectExercises()
+        data = collectExercises()
 
+        updateExercisesView(data)
         setupCheckBoxListeners()
-
-
-    }
-
-    // Recolecta los ejercicios de la base de datos Firestore
-    private fun collectExercises() {
-        db = FirebaseFirestore.getInstance()
-        val collectionReference = db.collection("exercises")
-
-        collectionReference.get().addOnSuccessListener { querySnapshot ->
-            data = mutableListOf<Exercise>()
-
-            for (document in querySnapshot.documents) {
-                val exercise = Exercise(
-                    document.id,
-                    document.getString("name") ?: "",
-                    document.getString("imageUrl") ?: "",
-                    document.getString("muscleGroup") ?: ""
-                )
-
-                data.add(exercise)
-            }
-
-            data.sortWith(compareBy({it.muscleGroup}, {it.name}))
-            updateExercisesView(data)
-        }
-    }
-
-    // Filtra los ejercicios según los CheckBox seleccionados
-    private fun filterExercises(): List<Exercise> {
-        val filteredData = mutableListOf<Exercise>()
-
-        if(
-            !binding.chAbdomen.isChecked &&
-            !binding.chBack.isChecked &&
-            !binding.chBiceps.isChecked &&
-            !binding.chChest.isChecked &&
-            !binding.chLegs.isChecked &&
-            !binding.chTriceps.isChecked &&
-            !binding.chShoulders.isChecked
-        ) {
-            filteredData += data
-        } else {
-            if(binding.chAbdomen.isChecked) {
-                filteredData += data.filter { it.muscleGroup == "abdomen" }
-            }
-
-            if(binding.chBack.isChecked) {
-                filteredData += data.filter { it.muscleGroup == "back" }
-            }
-
-            if(binding.chBiceps.isChecked) {
-                filteredData += data.filter { it.muscleGroup == "biceps" }
-            }
-
-            if(binding.chChest.isChecked) {
-                filteredData += data.filter { it.muscleGroup == "chest" }
-            }
-
-            if(binding.chLegs.isChecked) {
-                filteredData += data.filter { it.muscleGroup == "legs" }
-            }
-
-            if(binding.chTriceps.isChecked) {
-                filteredData += data.filter { it.muscleGroup == "triceps" }
-            }
-
-            if(binding.chShoulders.isChecked) {
-                filteredData += data.filter { it.muscleGroup == "shoulders" }
-            }
-        }
-
-        return filteredData
     }
 
     // Actualiza la vista del RecyclerView con los ejercicios dados
     private fun updateExercisesView(data: List<Exercise>) {
-        if(binding.rvExercices.adapter != null) {
-            (binding.rvExercices.adapter as ExerciseAdapter).data = filterExercises()
+        if (binding.rvExercices.adapter != null) {
+            (binding.rvExercices.adapter as ExerciseAdapter).data = filterExercises(
+                data,
+                binding.chAbdomen.isChecked,
+                binding.chBack.isChecked,
+                binding.chBiceps.isChecked,
+                binding.chChest.isChecked,
+                binding.chLegs.isChecked,
+                binding.chTriceps.isChecked,
+                binding.chShoulders.isChecked
+                )
             (binding.rvExercices.adapter as ExerciseAdapter).notifyDataSetChanged()
         } else {
             binding.rvExercices.adapter = ExerciseAdapter(data)
         }
     }
+
     private fun setupCheckBoxListeners() {
         val checkBoxes = listOf(
             binding.chAbdomen,
@@ -131,7 +66,7 @@ class ExercisesFragment : Fragment() {
 
         checkBoxes.forEach { checkBox ->
             checkBox.setOnCheckedChangeListener { _, _ ->
-                updateExercisesView(filterExercises())
+                updateExercisesView(data)
             }
         }
     }

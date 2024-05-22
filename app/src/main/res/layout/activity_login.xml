@@ -31,7 +31,8 @@
             android:layout_marginTop="24dp"
             android:autofillHints="emailAddress"
             android:hint="@string/common_email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@color/edit_text_color" />
 
         <EditText
             android:id="@+id/et_password"
@@ -40,7 +41,8 @@
             android:layout_marginTop="12dp"
             android:autofillHints="password"
             android:hint="@string/common_password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/edit_text_color" />
 
         <Button
             android:id="@+id/bt_login"
