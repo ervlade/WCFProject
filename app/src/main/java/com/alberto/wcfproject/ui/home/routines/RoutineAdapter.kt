@@ -67,7 +67,7 @@ class RoutineAdapter(val context: Context, private var data: List<Routine>) :
     }
 
     fun updateData(newData: List<Routine>) {
-        data = newData
+        this.data = newData
         notifyDataSetChanged()
     }
 }

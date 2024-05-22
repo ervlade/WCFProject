@@ -34,7 +34,9 @@ class RoutinesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        binding.rvRoutines.adapter = RoutineAdapter(requireContext(), collectRoutines())
+        adapter.updateData(collectRoutines())
+
+        //binding.rvRoutines.adapter = RoutineAdapter(requireContext(), collectRoutines())
     }
 
     private fun setUpViews() {
@@ -44,8 +46,10 @@ class RoutinesFragment : Fragment() {
         binding.fbEliminate.setOnClickListener {
             deleteSelectedRoutine(requireActivity(), adapter.getSelectedRoutines())
 
-            binding.rvRoutines.adapter = RoutineAdapter(requireContext(), collectRoutines())
-            binding.rvRoutines.adapter = adapter
+            adapter.updateData(collectRoutines())
+
+            //binding.rvRoutines.adapter = RoutineAdapter(requireContext(), collectRoutines())
+            //binding.rvRoutines.adapter = adapter
         }
 
         adapter = RoutineAdapter(requireContext(), collectRoutines())
