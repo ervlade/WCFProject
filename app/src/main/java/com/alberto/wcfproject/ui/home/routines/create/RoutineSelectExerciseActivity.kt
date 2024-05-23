@@ -2,6 +2,7 @@ package com.alberto.wcfproject.ui.home.routines.create
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
@@ -64,12 +65,14 @@ class RoutineSelectExerciseActivity : AppCompatActivity() {
         } else {
             val adapter = SelectExerciseAdapter(data)
 
-            adapter.dataSelected.addAll(
-                intent.getParcelableArrayExtra(
-                    "selected_exercises",
-                    SelectExercise::class.java
-                )?.toList() ?: listOf()
-            )
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                adapter.dataSelected.addAll(
+                    intent.getParcelableArrayExtra(
+                        "selected_exercises",
+                        SelectExercise::class.java
+                    )?.toList() ?: listOf()
+                )
+            }
             binding.rvExercices.adapter = adapter
         }
     }
