@@ -3,10 +3,12 @@ package com.alberto.wcfproject.ui.home.routines.create
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.model.SelectExercise
 import com.alberto.wcfproject.databinding.ActivityRoutineCreateBinding
+import com.alberto.wcfproject.ui.ToastUtil
 import com.alberto.wcfproject.utils.saveRoutineDataByUserInFirestore
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -30,7 +32,21 @@ class RoutineCreateActivity : AppCompatActivity() {
             onBackPressed()
         }
         binding.btUpdate.setOnClickListener {
-            saveRoutineDataByUserInFirestore(this, Firebase.auth.uid ?: "", binding.etRoutineName.text.toString(), dataSelected)
+            val routineName = binding.etRoutineName.text.toString()
+            if (routineName.isNotEmpty()) {
+                saveRoutineDataByUserInFirestore(
+                    this,
+                    Firebase.auth.uid ?: "",
+                    binding.etRoutineName.text.toString(),
+                    dataSelected
+                )
+
+            } else {
+                ToastUtil.showToast(this, getString(R.string.routine_create_screen_name_write))
+
+
+
+            }
         }
         binding.btAddExercises.setOnClickListener {
             val intent = Intent(this, RoutineSelectExerciseActivity::class.java).apply {

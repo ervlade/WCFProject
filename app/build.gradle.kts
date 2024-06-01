@@ -63,6 +63,7 @@ dependencies {
     implementation("com.firebaseui:firebase-ui-storage:7.2.0")
     implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
 
+
     // Database
     implementation("androidx.room:room-runtime:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")

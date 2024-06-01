@@ -3,12 +3,12 @@ package com.alberto.wcfproject.ui.login
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.database.WCFDatabase
 import com.alberto.wcfproject.data.model.User
 import com.alberto.wcfproject.databinding.ActivityLoginBinding
+import com.alberto.wcfproject.ui.ToastUtil
 import com.alberto.wcfproject.ui.home.HomeActivity
 import com.alberto.wcfproject.ui.register.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -37,12 +37,14 @@ class LoginActivity : AppCompatActivity() {
             if (validateFields()) {
                 loginUser(binding.etEmail.text.toString(), binding.etPassword.text.toString())
             } else {
-                Toast.makeText(this, getString(R.string.common_error_fields), Toast.LENGTH_SHORT)
-                    .show()
+                ToastUtil.showToast(this, getString(R.string.common_error_fields))
             }
         }
         binding.btRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+        binding.tvForgotPassword.setOnClickListener {
+            resetPassword()
         }
     }
 
@@ -73,12 +75,13 @@ class LoginActivity : AppCompatActivity() {
                         collectUserData(firebaseUser.uid)
                     } else {
                         auth.signOut()
-                        Toast.makeText(this, getString(R.string.login_screen_email_not_verified), Toast.LENGTH_SHORT)
-                            .show()
+                        ToastUtil.showToast(
+                            this,
+                            getString(R.string.login_screen_email_not_verified)
+                        )
                     }
                 } else {
-                    Toast.makeText(this, getString(R.string.login_screen_error), Toast.LENGTH_SHORT)
-                        .show()
+                    ToastUtil.showToast(this, getString(R.string.login_screen_error))
                 }
             }
     }
@@ -105,9 +108,38 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             } else {
 
-                Toast.makeText(this, getString(R.string.login_screen_error), Toast.LENGTH_SHORT)
-                    .show()
+                ToastUtil.showToast(this, getString(R.string.login_screen_error))
             }
         }
     }
+
+    // Envia un correo de restablecimiento de contraseña
+    private fun resetPassword() {
+        val email = binding.etEmail.text.toString().trim()
+
+        if (email.isEmpty()) {
+            ToastUtil.showToast(this, getString(R.string.login_screen_email_enter))
+
+            return
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            ToastUtil.showToast(this, getString(R.string.login_screen_email_format_incorrect))
+
+            return
+        }
+        FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    ToastUtil.showToast(this, getString(R.string.login_screen_email_reset_password))
+
+                } else {
+                    ToastUtil.showToast(this, getString(R.string.login_screen_email_again_later))
+
+
+                }
+            }
+    }
+
+
 }

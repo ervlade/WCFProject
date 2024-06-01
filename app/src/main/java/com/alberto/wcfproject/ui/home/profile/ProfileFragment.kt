@@ -37,15 +37,20 @@ class ProfileFragment : Fragment() {
             binding.etEmail.setText(user.email)
 
             if (user.weight > 0f) {
-                binding.etWeight.setText(user.weight.toString())
+                binding.etWeight.setText("${user.weight} kg")
             }
 
             if (user.height > 0f) {
-                binding.etHeight.setText(user.height.toString())
+                binding.etHeight.setText("${user.height} cm")
             }
 
             if (user.weight > 0f && user.height > 0f) {
-                binding.etImc.setText(String.format("%.2f", calculateIMC(user.weight, user.height)))
+                binding.etImc.setText(
+                    String.format(
+                        "%.2f IMC",
+                        calculateIMC(user.weight, user.height)
+                    )
+                )
             }
         }
 
@@ -57,31 +62,34 @@ class ProfileFragment : Fragment() {
                 binding.btEditSave.text = getString(R.string.profile_screen_save_data)
                 it.tag = "editMode"
             } else {
+                // Obtener los valores sin unidades para el cálculo
+                val weight = binding.etWeight.text.toString().replace(" kg", "").toFloat()
+                val height = binding.etHeight.text.toString().replace(" cm", "").toInt()
+
                 binding.etWeight.isEnabled = false
                 binding.etHeight.isEnabled = false
 
-                binding.etImc.setText(
-                    String.format(
-                        "%.2f",
-                        calculateIMC(
-                            binding.etWeight.text.toString().toFloat(),
-                            binding.etHeight.text.toString().toInt()
-                        )
-                    )
-                )
-                binding.btEditSave.text = getString(R.string.common_edit_save)
+                // Calcular y mostrar el nuevo IMC con la unidad "IMC"
+                binding.etImc.setText(String.format("%.2f IMC", calculateIMC(weight, height)))
 
+                // Guardar los datos del usuario
                 saveUserData(
                     requireActivity(),
-                    user?.copy(weight = binding.etWeight.text.toString().toFloat(), height = binding.etHeight.text.toString().toInt())
+                    user?.copy(weight = weight, height = height)
                 )
+
+                // Actualizar la vista con las unidades correctas
+                binding.etWeight.setText("$weight kg")
+                binding.etHeight.setText("$height cm")
+
+                binding.btEditSave.text = getString(R.string.common_edit_save)
                 it.tag = "viewMode"
             }
-
         }
 
         binding.btSignOff.setOnClickListener {
             LogoutDialog().show(parentFragmentManager, "DialogFragment")
         }
     }
+
 }

@@ -18,7 +18,11 @@
     <!--  Login Screen  -->
     <string name="login_screen_login">Iniciar sesión</string>
     <string name="login_screen_error">Error al inicio de sesión</string>
-    <string name="login_screen_email_not_verified">Tu correo electrónico no está verificado</string>
+    <string name="login_screen_email_enter">Por favor, introduce tu correo electrónico</string>
+    <string name="login_screen_email_not_verified">Correo electrónico no verificado</string>
+    <string name="login_screen_email_format_incorrect">El formato del correo electrónico es incorrecto</string>
+    <string name="login_screen_email_reset_password">Se ha enviado un correo electrónico para restablecer la contraseña</string>
+    <string name="login_screen_email_again_later">Ha ocurrido un error. Por favor, inténtalo de nuevo más tarde</string>
 
 
     <!--  Register Screen  -->
@@ -31,7 +35,6 @@
     <string name="register_screen_verification_email_failed"> Email verificación fallido</string>
 
 
-    verification_email_sent
 
 
     <!--  Exercises Screen  -->
@@ -74,6 +77,8 @@
     <string name="routine_create_screen_routine_add">Nueva rutina añadida</string>
     <string name="routine_create_screen_choose_exercises">Elegir ejercicios</string>
     <string name="routine_create_screen_deleted">Rutina eliminada</string>
+    <string name="routine_create_screen_name_write">Escribe el nombre de tu rutina</string>
+
 
     <!--  Routines Screen  -->
     <string name="routines_screen_title">Rutinas</string>

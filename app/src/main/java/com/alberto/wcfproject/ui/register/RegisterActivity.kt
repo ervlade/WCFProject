@@ -1,13 +1,12 @@
 package com.alberto.wcfproject.ui.register
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.model.User
 import com.alberto.wcfproject.databinding.ActivityRegisterBinding
+import com.alberto.wcfproject.ui.ToastUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,8 +40,8 @@ class RegisterActivity : AppCompatActivity() {
             if (validateFields()) {
                 registerUser(binding.etEmail.text.toString(), binding.etPassword.text.toString())
             } else {
-                Toast.makeText(this, getString(R.string.common_error_fields), Toast.LENGTH_SHORT)
-                    .show()
+                ToastUtil.showToast(this, getString(R.string.common_error_fields))
+
             }
         }
     }
@@ -52,12 +51,9 @@ class RegisterActivity : AppCompatActivity() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // El usuario se registró exitosamente
                     val firebaseUser = auth.currentUser
                     if (firebaseUser != null) {
-                        // Enviar correo de verificación
                         sendVerificationEmail(firebaseUser)
-                        // Crear el objeto UserData con los datos ingresados por el usuario
                         val user = User(
                             firebaseUser.uid,
                             email,
@@ -68,11 +64,8 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 } else {
                     // Error al registrar el usuario
-                    Toast.makeText(
-                        this,
-                        getString(R.string.register_screen_error_firebase),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    ToastUtil.showToast(this, getString(R.string.register_screen_error_firebase))
+
                 }
             }
     }
@@ -82,18 +75,12 @@ class RegisterActivity : AppCompatActivity() {
         firestore.collection("users").document(user.uid).set(user.toMap())
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(
-                        this, getString(R.string.register_screen_successfully_register),
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    ToastUtil.showToast(this, getString(R.string.register_screen_successfully_register))
+
                     finish()
                 } else {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.common_register_fail),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    ToastUtil.showToast(this, getString(R.string.common_register_fail))
+
                 }
             }
     }
@@ -125,18 +112,10 @@ class RegisterActivity : AppCompatActivity() {
         user.sendEmailVerification()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(
-                        this,
-                        getString(R.string.register_screen_verification_email_sent),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    ToastUtil.showToast(this, getString(R.string.register_screen_verification_email_sent))
+
                 } else {
-                    Log.e("RegisterActivity", "Error al enviar el correo de verificación: ${task.exception}")
-                    Toast.makeText(
-                        this,
-                        getString(R.string.register_screen_verification_email_failed),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    ToastUtil.showToast(this, getString(R.string.register_screen_verification_email_failed))
                 }
             }
     }
