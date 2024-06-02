@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.model.User
 import com.alberto.wcfproject.databinding.ActivityRegisterBinding
-import com.alberto.wcfproject.ui.ToastUtil
+import com.alberto.wcfproject.utils.ToastUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore

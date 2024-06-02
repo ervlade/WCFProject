@@ -8,9 +8,9 @@ import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.database.WCFDatabase
 import com.alberto.wcfproject.data.model.User
 import com.alberto.wcfproject.databinding.ActivityLoginBinding
-import com.alberto.wcfproject.ui.ToastUtil
 import com.alberto.wcfproject.ui.home.HomeActivity
 import com.alberto.wcfproject.ui.register.RegisterActivity
+import com.alberto.wcfproject.utils.ToastUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 

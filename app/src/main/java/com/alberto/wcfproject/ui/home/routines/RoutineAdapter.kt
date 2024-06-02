@@ -50,7 +50,7 @@ class RoutineAdapter(val context: Context, private var data: List<Routine>) :
                 context.startActivity(intent)
 
             }
-            binding.cbSelectRoutine.setOnCheckedChangeListener(null) // Clear previous listeners
+            binding.cbSelectRoutine.setOnCheckedChangeListener(null)
             binding.cbSelectRoutine.isChecked = selectedRoutines.contains(itemData)
             binding.cbSelectRoutine.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {

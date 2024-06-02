@@ -76,6 +76,7 @@ class ExerciseDetailActivity : AppCompatActivity() {
         binding.etExerciseRepetitions.setText(exerciseUser?.repetitions?.toString())
         binding.etNotes.setText(exerciseUser?.notes)
     }
+    // Habilita o deshabilita la edición en los EditText según el valor booleano proporcionado.
     private fun enableEditTexts(enable: Boolean) {
         binding.etExerciseWeight.isEnabled = enable
         binding.etExerciseRepetitions.isEnabled = enable

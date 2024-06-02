@@ -9,6 +9,7 @@ import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.database.WCFDatabase
 import com.alberto.wcfproject.databinding.FragmentProfileBinding
 import com.alberto.wcfproject.utils.calculateIMC
+import com.alberto.wcfproject.utils.getIMCMessage
 import com.alberto.wcfproject.utils.saveUserData
 
 class ProfileFragment : Fragment() {
@@ -45,12 +46,9 @@ class ProfileFragment : Fragment() {
             }
 
             if (user.weight > 0f && user.height > 0f) {
-                binding.etImc.setText(
-                    String.format(
-                        "%.2f IMC",
-                        calculateIMC(user.weight, user.height)
-                    )
-                )
+                val imc = calculateIMC(user.weight, user.height)
+                binding.etImc.setText(String.format("%.2f IMC", imc))
+                binding.tvImcMessage.text = getIMCMessage(requireContext(), imc)
             }
         }
 
@@ -70,7 +68,9 @@ class ProfileFragment : Fragment() {
                 binding.etHeight.isEnabled = false
 
                 // Calcular y mostrar el nuevo IMC con la unidad "IMC"
-                binding.etImc.setText(String.format("%.2f IMC", calculateIMC(weight, height)))
+                val imc = calculateIMC(weight, height)
+                binding.etImc.setText(String.format("%.2f IMC", imc))
+                binding.tvImcMessage.text = getIMCMessage(requireContext(), imc)
 
                 // Guardar los datos del usuario
                 saveUserData(

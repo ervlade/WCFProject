@@ -34,9 +34,6 @@
     <string name="register_screen_verification_email_sent"> Email verificación enviado</string>
     <string name="register_screen_verification_email_failed"> Email verificación fallido</string>
 
-
-
-
     <!--  Exercises Screen  -->
     <string name="exercises_screen_chest">Pecho</string>
     <string name="exercises_screen_back">Espalda</string>
@@ -58,13 +55,11 @@
     <string name="profile_screen_imc">IMC</string>
     <string name="profile_screen_registrate">Usuario registrado exitosamente</string>
 
-
     <!--  Dialog Screen  -->
     <string name="dialog_screen_question">¿Seguro que quieres cerrar sesión?</string>
     <string name="dialog_screen_cancel">Cancelar</string>
     <string name="dialog_screen_accept">Aceptar</string>
     <string name="dialog_screen_session_close">Sesión cerrada</string>
-
 
     <!--  Dialog Screen  -->
     <string name="exercise_detail_screen_save_data">Guardar datos</string>
@@ -79,8 +74,18 @@
     <string name="routine_create_screen_deleted">Rutina eliminada</string>
     <string name="routine_create_screen_name_write">Escribe el nombre de tu rutina</string>
 
-
     <!--  Routines Screen  -->
     <string name="routines_screen_title">Rutinas</string>
+
+    <!--  BMI ranges message  -->
+    <string name="range_1">Cuando tu IMC está por debajo de 18.5, significa que estás por debajo del peso normal. Esto puede indicar que no estás recibiendo suficientes nutrientes o que puedes tener una condición médica que necesita atención.</string>
+    <string name="range_2">Un IMC en este rango es una buena señal, significa que estás en un peso normal y saludable. Esto generalmente se asocia con un menor riesgo de problemas de salud relacionados con la obesidad.</string>
+    <string name="range_3">Cuando tu IMC está en este rango, tienes un poco de sobrepeso. No te preocupes, pero es importante tener en cuenta que podría aumentar tu riesgo de desarrollar problemas de salud como la diabetes tipo 2 o enfermedades cardíacas.</string>
+    <string name="range_4">Aquí es donde comenzamos a hablar de obesidad. Si tu IMC está en este rango, significa que tienes obesidad grado I. Esto aumenta significativamente el riesgo de problemas de salud graves, como diabetes tipo 2 y enfermedades cardíacas.</string>
+    <string name="range_5">En este punto, la obesidad se considera más grave. Si tu IMC está en este rango, tienes obesidad grado II. Esto significa un mayor riesgo de problemas de salud como enfermedades cardíacas, apnea del sueño y ciertos tipos de cáncer.</string>
+    <string name="range_6">Cuando tu IMC supera los 40, tienes obesidad grado III, también conocida como obesidad mórbida. Esta es la forma más grave de obesidad y conlleva un riesgo extremadamente alto de problemas de salud graves y potencialmente mortales.</string>
+
+
+
 
 </resources>

@@ -13,6 +13,7 @@ import com.alberto.wcfproject.data.model.User
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.storage
 import com.google.gson.Gson
@@ -21,9 +22,11 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import java.util.UUID
 
+// Obtiene una referencia a una imagen almacenada en Firebase Storage.
 fun getFirebaseImageReference(imagePath: String): StorageReference {
     return Firebase.storage.reference.child(imagePath)
 }
+// Recupera los datos de un ejercicio asociado a un usuario desde Firestore.
 
 fun collectExerciseDataByUserFromFirestore(userId: String, exerciseUid: String): ExerciseUser? {
     return runBlocking {
@@ -51,7 +54,13 @@ fun collectExerciseDataByUserFromFirestore(userId: String, exerciseUid: String):
     }
 }
 
-fun saveExerciseDataByUserInFirestore(context: Activity, userId: String, exercise: ExerciseUser, create: Boolean) {
+// Guarda los datos de un ejercicio asociado a un usuario en Firestore, actualizando o creando según sea necesario.
+fun saveExerciseDataByUserInFirestore(
+    context: Activity,
+    userId: String,
+    exercise: ExerciseUser,
+    create: Boolean,
+) {
     if (!create) {
         FirebaseFirestore.getInstance().collection("exercises_user").document(userId)
             .collection("exercises").document(exercise.uid)
@@ -118,6 +127,7 @@ fun collectExercises(): List<Exercise> {
     }
 }
 
+// Recopila información sobre los ejercicios a partir de sus IDs y devuelve una lista de objetos Exercise correspondientes.
 fun collectExercises(exercisesIds: List<String>): List<Exercise> {
     return runBlocking {
         val data = mutableListOf<Exercise>()
@@ -140,6 +150,7 @@ fun collectExercises(exercisesIds: List<String>): List<Exercise> {
     }
 }
 
+//Guarda los datos del usuario
 fun saveUserData(context: Activity, user: User?) {
     if (user != null) {
         WCFDatabase.instance?.userDao()?.updateActiveUser(user)
@@ -163,6 +174,7 @@ fun saveUserData(context: Activity, user: User?) {
     }
 }
 
+//Guarda los datos de la rutina
 fun saveRoutineDataByUserInFirestore(
     context: Activity,
     userId: String,
@@ -200,6 +212,7 @@ fun saveRoutineDataByUserInFirestore(
         }
 }
 
+//Recolecta las rutinas de la base de datos Firestore
 fun collectRoutines(): List<Routine> {
     return runBlocking {
         val result =
@@ -227,21 +240,24 @@ fun collectRoutines(): List<Routine> {
     }
 }
 
+//Eliminación de las rutinas seleccionadas
 fun deleteSelectedRoutine(context: Activity, selectedRoutines: List<Routine>) {
-    runBlocking {
-        val collectionReference =
-            FirebaseFirestore.getInstance().collection("routines")
-            .document(Firebase.auth.uid.toString()).collection("routines")
-        
-        selectedRoutines.forEach { routine ->
-            //println(routine.id)
-            collectionReference.document(routine.id).delete().await()
-        }
-        
-        Toast.makeText(
-            context,
-            context.getString(R.string.routine_create_screen_deleted),
-            Toast.LENGTH_SHORT
+    if (selectedRoutines.isNotEmpty()) {
+        runBlocking {
+            val collectionReference = Firebase.firestore
+                .collection("routines")
+                .document(Firebase.auth.uid.toString())
+                .collection("routines")
+
+            selectedRoutines.forEach { routine ->
+                collectionReference.document(routine.id).delete().await()
+            }
+
+            Toast.makeText(
+                context,
+                context.getString(R.string.routine_create_screen_deleted),
+                Toast.LENGTH_SHORT
             ).show()
+        }
     }
 }

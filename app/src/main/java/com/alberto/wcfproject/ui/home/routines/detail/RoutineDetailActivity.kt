@@ -20,14 +20,15 @@ class RoutineDetailActivity : AppCompatActivity() {
 
     }
 
-    private fun  setUpViews(){
+    private fun setUpViews() {
         binding.inToolbar.tvTitle.text = intent.getStringExtra("routine_name")
         binding.inToolbar.ivBack.setOnClickListener {
             onBackPressed()
         }
 
         val exercises = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableArrayListExtra("routine_exercises",  Exercise::class.java)?.toList() ?: listOf()
+            intent.getParcelableArrayListExtra("routine_exercises", Exercise::class.java)?.toList()
+                ?: listOf()
         } else {
             TODO("VERSION.SDK_INT < TIRAMISU")
         }

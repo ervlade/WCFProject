@@ -1,5 +1,7 @@
 package com.alberto.wcfproject.utils
 
+import android.content.Context
+import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.model.Exercise
 import com.alberto.wcfproject.data.model.SelectExercise
 
@@ -59,6 +61,7 @@ fun filterExercises(
     return filteredData
 }
 
+// Filtra los ejercicios seleccionados según los grupos musculares marcados.
 fun filterSelectedExercises(
     data: List<SelectExercise>,
     abdomenChecked: Boolean,
@@ -117,4 +120,16 @@ fun filterSelectedExercises(
 // Calcula el Índice de Masa Corporal (IMC) del usuario
 fun calculateIMC(weight: Float, height: Int): Float {
     return weight / (height * 0.02f)
+}
+
+// Función para obtener el mensaje del IMC basado en el rango
+fun getIMCMessage(context: Context, imc: Float): String {
+    return when {
+        imc < 18.5 -> context.getString(R.string.range_1)
+        imc in 18.5..24.9 -> context.getString(R.string.range_2)
+        imc in 25.0..29.9 -> context.getString(R.string.range_3)
+        imc in 30.0..34.9 -> context.getString(R.string.range_4)
+        imc in 35.0..39.9 -> context.getString(R.string.range_5)
+        else -> context.getString(R.string.range_6)
+    }
 }

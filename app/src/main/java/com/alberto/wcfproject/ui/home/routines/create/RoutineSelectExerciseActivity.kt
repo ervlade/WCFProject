@@ -24,7 +24,15 @@ class RoutineSelectExerciseActivity : AppCompatActivity() {
 
         setUpViews()
 
-        data = collectExercises().map { SelectExercise(it.uid, it.name, it.image, it.muscleGroup, false) }.toMutableList()
+        data = collectExercises().map {
+            SelectExercise(
+                it.uid,
+                it.name,
+                it.image,
+                it.muscleGroup,
+                false
+            )
+        }.toMutableList()
 
         updateExercisesView(data)
         setupCheckBoxListeners()
@@ -77,6 +85,7 @@ class RoutineSelectExerciseActivity : AppCompatActivity() {
         }
     }
 
+    //Configura los listeners de los checkboxes
     private fun setupCheckBoxListeners() {
         val checkBoxes = listOf(
             binding.chAbdomen,

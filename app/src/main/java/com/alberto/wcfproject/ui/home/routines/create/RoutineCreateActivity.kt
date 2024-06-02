@@ -3,12 +3,11 @@ package com.alberto.wcfproject.ui.home.routines.create
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alberto.wcfproject.R
 import com.alberto.wcfproject.data.model.SelectExercise
 import com.alberto.wcfproject.databinding.ActivityRoutineCreateBinding
-import com.alberto.wcfproject.ui.ToastUtil
+import com.alberto.wcfproject.utils.ToastUtil
 import com.alberto.wcfproject.utils.saveRoutineDataByUserInFirestore
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -55,7 +54,6 @@ class RoutineCreateActivity : AppCompatActivity() {
             startActivityForResult(intent, 1)
         }
     }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
